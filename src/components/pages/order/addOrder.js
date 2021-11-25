@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   CButton,
   CCard,
@@ -19,9 +19,10 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { connect } from "react-redux";
-import { addProductService, getAllProductService } from 'src/reduxUtils/services/Product'
+import { addProductAction } from 'src/reduxUtils/actions/productAction'
+import { signupAction } from 'src/reduxUtils/actions/signupAction';
 
-const AddProduct = () => {
+const AddOrder = () => {
 
   const [imageOne, setimageOne] = useState("./images/pImage.png");
   const [imageTwo, setimageTwo] = useState("./images/pImage.png");
@@ -41,21 +42,11 @@ const AddProduct = () => {
     loadingAlert = true
     event.preventDefault();
     //console.log(inputs);
-    addProductService(inputs).then((data)=>{
-        console.log(data.status)
-        if(data.status == 200)
-        {
-          alert("data saved succesfully!")
-        }else{
-          alert("something wrong!")
-        }
-        const name = event.target.name
-        setInputs(values => ({[name]: null}))
-      }).catch((err)=>{
-        alert("something wrong!")
+    signupAction({      
+        "mobile":"8877992198",
+        "password": "123456"
       })
   }
-  
   return (
     <>
       <CRow>
@@ -64,6 +55,15 @@ const AddProduct = () => {
             <CCardHeader>
               Add Product
             </CCardHeader>
+            {loadingAlert?'':<CAlert color="warning" variant="solid">
+              A simple primary alert—check it out!
+            </CAlert>}
+            {successAlert?<CAlert color="success" variant="solid">
+              A simple primary alert—check it out!
+            </CAlert>:''}
+            {errorAlert?<CAlert color="danger" variant="solid">
+              A simple primary alert—check it out!
+            </CAlert>:''}
             <CCardBody>
               <CForm className="form-horizontal">
                 <CFormGroup row>
@@ -92,14 +92,6 @@ const AddProduct = () => {
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel htmlFor="text-input">Quantity</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="3">
-                    <CInput id="number-input" name="quantity" value={inputs.quantity || ""} onChange={handleChange} placeholder="Enter Quantity"/>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
                     <CLabel htmlFor="textarea-input">Description</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
@@ -114,14 +106,14 @@ const AddProduct = () => {
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel htmlFor="select">Event</CLabel>
+                    <CLabel htmlFor="select">Quantity</CLabel>
                   </CCol>
                   <CCol xs="12" md="3">
-                    <CSelect custom name="event" value={inputs.event || ""} onChange={handleChange} id="select">
+                    <CSelect custom name="quantity" value={inputs.quantity || ""} onChange={handleChange} id="select">
                       <option value="0">Please select</option>
-                      <option value="haldi">Haldi</option>
-                      <option value="sadi">Sadi</option>
-                      <option value="barat">Barat</option>
+                      <option value="1">Option #1</option>
+                      <option value="2">Option #2</option>
+                      <option value="3">Option #3</option>
                     </CSelect>
                   </CCol>
                 </CFormGroup>
@@ -132,8 +124,9 @@ const AddProduct = () => {
                   <CCol xs="12" md="3">
                     <CSelect custom name="category_id" value={inputs.category_id || ""} onChange={handleChange} id="select">
                       <option value="0">Please select </option>
-                      <option value="1">Sharee</option>
-                      <option value="2">Lehenga</option>
+                      <option value="1">Option #1</option>
+                      <option value="2">Option #2</option>
+                      <option value="3">Option #3</option>
                     </CSelect>
                   </CCol>
                 </CFormGroup>
@@ -184,10 +177,10 @@ const AddProduct = () => {
           </CCard>
         </CCol>
       </CRow>
-
+      
     </>
   )
 }
 
-export default AddProduct;
+export default connect(null, { signupAction })(AddOrder);
 

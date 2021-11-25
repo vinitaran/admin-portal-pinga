@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React,{  useState,useEffect} from 'react'
+
 import {
   CButton,
   CCard,
@@ -18,6 +19,8 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
+import { getSingleProductService, updateProductService } from 'src/reduxUtils/services/Product'
+
 
 const UpdateProduct = () => {
 
@@ -28,6 +31,39 @@ const UpdateProduct = () => {
   const [imageFive, setimageFive] = useState("./images/pImage.png");
   
   
+  var [dataList, setDataList] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      getSingleProductService(localStorage.getItem("productViewId")).then(res=>{
+        setDataList(res.data.data[0]) 
+        //console.log(res.data.data[0])
+      })
+    }, 5000);
+  })
+  const [inputs, setInputs] = useState({});
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //console.log(inputs);
+    updateProductService(inputs).then((data)=>{
+        if(data.status == 200)
+        {
+          alert("data saved succesfully!")
+        }else{
+          alert("something wrong!")
+        }
+        const name = event.target.name
+        setInputs(values => ({[name]: null}))
+      }).catch((err)=>{
+        alert("something wrong!")
+      })
+  }
   return (
     <>
       <CRow>
@@ -43,7 +79,7 @@ const UpdateProduct = () => {
                     <CLabel htmlFor="text-input">Product Name</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="text-input" name="text-input" placeholder="Enter Product Name" />
+                    <CInput id="text-input" name="name" value={inputs.name} onChange={handleChange} placeholder="Enter Product Name" />
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -51,7 +87,7 @@ const UpdateProduct = () => {
                     <CLabel htmlFor="number-input">Price</CLabel>
                   </CCol>
                   <CCol xs="12" md="3">
-                    <CInput id="text-input" name="text-input" placeholder="Enter Price"/>
+                    <CInput id="text-input" name="price" value={inputs.price } onChange={handleChange} placeholder="Enter Price"/>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -59,7 +95,7 @@ const UpdateProduct = () => {
                     <CLabel htmlFor="text-input">Sale Price</CLabel>
                   </CCol>
                   <CCol xs="12" md="3">
-                    <CInput id="text-input" name="text-input" placeholder="Enter Sale Price"/>
+                    <CInput id="text-input" name="sell_price" value={inputs.sell_price} onChange={handleChange} placeholder="Enter Sale Price"/>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -68,7 +104,9 @@ const UpdateProduct = () => {
                   </CCol>
                   <CCol xs="12" md="9">
                     <CTextarea 
-                      name="textarea-input" 
+                      name="description" 
+                      value={inputs.description}
+                      onChange={handleChange}
                       id="textarea-input" 
                       rows="9"
                       placeholder="Enter Product Description..." 
@@ -80,7 +118,8 @@ const UpdateProduct = () => {
                     <CLabel htmlFor="select">Quantity</CLabel>
                   </CCol>
                   <CCol xs="12" md="3">
-                    <CSelect custom name="select" id="select">
+                    <CSelect custom name="quantity" value={inputs.quantity}
+                    onChange={handleChange}id="select">
                       <option value="0">Please select</option>
                       <option value="1">Option #1</option>
                       <option value="2">Option #2</option>
@@ -93,7 +132,8 @@ const UpdateProduct = () => {
                     <CLabel htmlFor="select">Category</CLabel>
                   </CCol>
                   <CCol xs="12" md="3">
-                    <CSelect custom name="select" id="select">
+                    <CSelect custom name="category_id" value={inputs.category_id}
+                    onChange={handleChange} id="select">
                       <option value="0">Please select </option>
                       <option value="1">Option #1</option>
                       <option value="2">Option #2</option>

@@ -1,6 +1,6 @@
 import requestApi from '../../requestApi/requestApi';
 
-export const addProduct = (data) => {
+export const addProductService = (data) => {
   return requestApi({
     url: `/product`,
     method: 'POST',
@@ -8,14 +8,22 @@ export const addProduct = (data) => {
   });
 };
 
-export const getAllProduct = () => {
+export const getAllProductService = () => {
   return requestApi({
     url: `/product`,
     method: 'GET',
   });
 };
 
-export const updateProduct = (id, data) => {
+
+export const getSingleProductService = (id) => {
+  return requestApi({
+    url: `/product/${id}`,
+    method: 'GET',
+  });
+};
+
+export const updateProductService = (id, data) => {
   return requestApi({
     url: `/product/${id}`,
     method: 'PUT',
