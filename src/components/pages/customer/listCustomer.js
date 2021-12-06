@@ -11,7 +11,7 @@ import {
 } from '@coreui/react'
 
 
-import { getAllOrderService } from 'src/reduxUtils/services/Order'
+import { getAllCustomerService } from 'src/reduxUtils/services/Customer'
 import usersData from '../../../views/users/UsersData'
 
 const getBadge = status => {
@@ -26,21 +26,19 @@ const getBadge = status => {
 
 
 
-const fields = ['product_name','quantity','price', 'sell_price','category_name','event','status']
-const ListOrder = () => {
+const fields = ['name','mobile','email']
+const ListCustomer = () => {
 
   var [dataList, setDataList] = useState([]);
   
-  let AllOrderList = []
+  let AllCustomerList = []
   useEffect(() => {
-    setTimeout(() => {
-      getAllOrderService().then(res=>{
-        AllOrderList = res.data.data
-        setDataList(res.data.data)
-        console.log("orderlist")
-        console.log(AllOrderList)
-      })
-    }, 1000);
+    getAllCustomerService().then(res=>{
+      AllCustomerList = res.data.data
+      setDataList(res.data.data)
+      console.log("AllCustomerList")
+      console.log(AllCustomerList)
+    })
   })
   return (
     <>
@@ -48,7 +46,7 @@ const ListOrder = () => {
         <CCol xs="12" lg="12">
           <CCard>
             <CCardHeader>
-              Order List
+              Customer List
             </CCardHeader>
             <CCardBody>
             <CDataTable
@@ -60,8 +58,8 @@ const ListOrder = () => {
                 'status':
                   (dataList)=>(
                     <td>
-                      <CButton block onClick={()=>{localStorage.setItem("orderViewId", dataList.id)
-                        window.location.href='/#/update-order'
+                      <CButton block onClick={()=>{localStorage.setItem("CustomerViewId", dataList.id)
+                        window.location.href='/#/update-customer'
                         }} 
                         color="secondary">{dataList.status}
                       </CButton>
@@ -77,4 +75,4 @@ const ListOrder = () => {
   )
 }
 
-export default ListOrder
+export default ListCustomer

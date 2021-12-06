@@ -148,28 +148,28 @@ const AddProduct = () => {
                   </CCol>
                   <CLabel col md="3" htmlFor="file-input">Image Two</CLabel>
                   <CCol xs="12" md="6">
-                    <CInputFile id="file-input" name="file-input"/>
+                    <CInputFile id="file-input" name="image_two"/>
                   </CCol>
                   <CCol md="3">
                     <img src={imageOne}/>
                   </CCol>
                   <CLabel col md="3" htmlFor="file-input">Image Three</CLabel>
                   <CCol xs="12" md="6">
-                    <CInputFile id="file-input" name="file-input"/>
+                    <CInputFile id="file-input" name="image_three"/>
                   </CCol>
                   <CCol md="3">
                     <img src={imageOne}/>
                   </CCol>
                   <CLabel col md="3" htmlFor="file-input">Image Four</CLabel>
                   <CCol xs="12" md="6">
-                    <CInputFile id="file-input" name="file-input"/>
+                    <CInputFile id="file-input" name="image_four"/>
                   </CCol>
                   <CCol md="3">
                     <img src={imageOne}/>
                   </CCol>
                   <CLabel col md="3" htmlFor="file-input">Image Five</CLabel>
                   <CCol xs="12" md="6">
-                    <CInputFile id="file-input" name="file-input"/>
+                    <CInputFile id="file-input" name="image_five"/>
                   </CCol>
                   <CCol md="3">
                     <img src={imageOne}/>

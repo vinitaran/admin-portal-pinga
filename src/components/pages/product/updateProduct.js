@@ -31,16 +31,6 @@ const UpdateProduct = () => {
   const [imageFive, setimageFive] = useState("./images/pImage.png");
   
   
-  var [dataList, setDataList] = useState([]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      getSingleProductService(localStorage.getItem("productViewId")).then(res=>{
-        setDataList(res.data.data[0]) 
-        //console.log(res.data.data[0])
-      })
-    }, 5000);
-  })
   const [inputs, setInputs] = useState({});
   const handleChange = (event) => {
     const name = event.target.name;
@@ -48,6 +38,16 @@ const UpdateProduct = () => {
     setInputs(values => ({...values, [name]: value}))
   }
   
+  var [dataList, setDataList] = useState([]);
+  var productId = localStorage.getItem("productViewId")
+  useEffect(() => {
+      getSingleProductService(productId).then(res=>{
+        setDataList(res.data.data[0]) 
+        //console.log(res.data.data[0])
+      })
+  })
+  console.log(dataList)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     //console.log(inputs);
@@ -64,6 +64,7 @@ const UpdateProduct = () => {
         alert("something wrong!")
       })
   }
+  
   return (
     <>
       <CRow>
@@ -79,7 +80,7 @@ const UpdateProduct = () => {
                     <CLabel htmlFor="text-input">Product Name</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="text-input" name="name" value={inputs.name} onChange={handleChange} placeholder="Enter Product Name" />
+                    <CInput id="text-input" name="name" value={inputs.name?inputs.name:dataList.name} onChange={handleChange} placeholder="Enter Product Name" />
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>

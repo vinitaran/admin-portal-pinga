@@ -11,7 +11,7 @@ import {
 } from '@coreui/react'
 
 
-import { getAllOrderService } from 'src/reduxUtils/services/Order'
+import { getAllInventoryService } from 'src/reduxUtils/services/Inventory'
 import usersData from '../../../views/users/UsersData'
 
 const getBadge = status => {
@@ -26,21 +26,19 @@ const getBadge = status => {
 
 
 
-const fields = ['product_name','quantity','price', 'sell_price','category_name','event','status']
-const ListOrder = () => {
+const fields = ['name','quantity','stock', 'view']
+const ListInventory = () => {
 
   var [dataList, setDataList] = useState([]);
   
-  let AllOrderList = []
+  let AllInventoryList = []
   useEffect(() => {
-    setTimeout(() => {
-      getAllOrderService().then(res=>{
-        AllOrderList = res.data.data
-        setDataList(res.data.data)
-        console.log("orderlist")
-        console.log(AllOrderList)
-      })
-    }, 1000);
+    getAllInventoryService().then(res=>{
+      AllInventoryList = res.data.data
+      setDataList(res.data.data)
+      console.log("AllInventoryList")
+      console.log(AllInventoryList)
+    })
   })
   return (
     <>
@@ -48,7 +46,7 @@ const ListOrder = () => {
         <CCol xs="12" lg="12">
           <CCard>
             <CCardHeader>
-              Order List
+            Inventory
             </CCardHeader>
             <CCardBody>
             <CDataTable
@@ -57,13 +55,13 @@ const ListOrder = () => {
               itemsPerPage={10}
               pagination
               scopedSlots = {{
-                'status':
+                'view':
                   (dataList)=>(
                     <td>
-                      <CButton block onClick={()=>{localStorage.setItem("orderViewId", dataList.id)
-                        window.location.href='/#/update-order'
+                      <CButton block onClick={()=>{localStorage.setItem("inventoryViewId", dataList.id)
+                        window.location.href='/#/single-inventory'
                         }} 
-                        color="secondary">{dataList.status}
+                        color="secondary">View
                       </CButton>
                     </td>
                   )
@@ -77,4 +75,4 @@ const ListOrder = () => {
   )
 }
 
-export default ListOrder
+export default ListInventory
