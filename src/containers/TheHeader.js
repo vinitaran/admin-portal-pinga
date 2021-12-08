@@ -54,32 +54,14 @@ const TheHeader = () => {
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
-        <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/add-product">Add Product</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/update-product">Update Product</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/list-product">Product List</CHeaderNavLink>
-        </CHeaderNavItem>
         
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/list-order">Order List</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/list-customer">Customer List</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/list-inventory">Inventory</CHeaderNavLink>
-        </CHeaderNavItem>
       </CHeaderNav>
 
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif/>
+        {/* <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/>
+        <TheHeaderDropdownMssg/> */}
         <TheHeaderDropdown/>
       </CHeaderNav>
 
