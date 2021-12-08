@@ -12,7 +12,6 @@ import {
 
 
 import { getAllInventoryService } from 'src/reduxUtils/services/Inventory'
-import usersData from '../../../views/users/UsersData'
 
 const getBadge = status => {
   switch (status) {

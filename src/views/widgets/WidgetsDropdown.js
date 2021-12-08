@@ -10,7 +10,6 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import ChartLineSimple from '../charts/ChartLineSimple'
-import ChartBarSimple from '../charts/ChartBarSimple'
 
 const WidgetsDropdown = () => {
   // render
