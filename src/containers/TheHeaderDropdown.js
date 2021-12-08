@@ -39,7 +39,8 @@ const TheHeaderDropdown = () => {
           <CIcon name="cil-user" className="mfe-2" />Profile
         </CDropdownItem>
         <CDropdownItem>
-          <CIcon name="cil-settings" className="mfe-2" />Settings
+          <CIcon name="cil-settings" className="mfe-2" />
+          Settings
         </CDropdownItem>
         
         <CDropdownItem divider />
@@ -49,7 +50,7 @@ const TheHeaderDropdown = () => {
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
-  )
+  ) 
 }
 
 export default TheHeaderDropdown
