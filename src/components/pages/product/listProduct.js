@@ -12,7 +12,6 @@ import {
 
 
 import { getAllProductService } from 'src/reduxUtils/services/Product'
-import usersData from '../../../views/users/UsersData'
 
 const getBadge = status => {
   switch (status) {
