@@ -62,7 +62,6 @@ const routes = [
   { path: '/base/forms', name: 'Forms', component: BasicForms },
   
   // by manish
-  
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/add-product', name: 'Add Product', component: addProductForms },

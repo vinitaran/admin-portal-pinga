@@ -27,7 +27,7 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <h1>Shreeji Fasion</h1>
+        <h1>Shreeji Fashion</h1>
         {/* <CIcon
           className="c-sidebar-brand-full"
           name="logo-negative"
