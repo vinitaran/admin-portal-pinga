@@ -1,5 +1,5 @@
 import React from 'react'
-import CIcon from '@coreui/icons-react'
+import {CIcon} from '@coreui/icons-react'
 
 const _nav =  [
   {
@@ -38,6 +38,29 @@ const _nav =  [
     to: '/list-inventory',
     icon: 'cil-pencil',
   },
+  { 
+    _tag: 'CSidebarNavItem',
+    name: 'Setting',
+    to: '/add-extra'
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Add New Content',
+    to: '/add-extra',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Content list',
+    to: '/list-extra',
+    icon: 'cil-pencil',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Update Content',
+    to: '/update-extra',
+    icon: 'cil-pencil',
+  }
 ]
 
 export default _nav

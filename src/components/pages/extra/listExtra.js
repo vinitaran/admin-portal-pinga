@@ -11,7 +11,7 @@ import {
 } from '@coreui/react'
 
 
-import { getAllProductService } from 'src/reduxUtils/services/Product'
+import { getAllExtraService } from 'src/reduxUtils/services/Extra'
 
 const getBadge = status => {
   switch (status) {
@@ -25,27 +25,32 @@ const getBadge = status => {
 
 
 
-const fields = ['name','quantity','price', 'sell_price','category_name','status']
-const ListProduct = () => {
+const fields = ['title','type','status','view']
+const ListExtra = () => {
 
   var [dataList, setDataList] = useState([]);
   
-  let AllProductList = []
+  let AllExtraList = []
   useEffect(() => {
-    setTimeout(() => {
-      getAllProductService().then(res=>{
-        AllProductList = res.data.data
-        setDataList(res.data.data)
+    var extra_list = []
+    
+      getAllExtraService().then(res=>{
+        AllExtraList = res.data.data
+        console.log(AllExtraList)
+        AllExtraList.map((data)=>{
+          extra_list.push({ "type":data.type, "title":data.data.title, "status":data.status})
+        })
+        setDataList(extra_list)
       })
-    }, 1000);
-  })
+    
+  },[])
   return (
     <>
       <CRow>
         <CCol xs="12" lg="12">
           <CCard>
             <CCardHeader>
-              Product List
+              Extra List
             </CCardHeader>
             <CCardBody>
             <CDataTable
@@ -54,11 +59,11 @@ const ListProduct = () => {
               itemsPerPage={10}
               pagination
               scopedSlots = {{
-                'status':
+                'view':
                   (dataList)=>(
                     <td>
-                      <CButton block onClick={()=>{localStorage.setItem("productViewId", dataList.id)
-                        window.location.href='/#/update-product'
+                      <CButton block onClick={()=>{localStorage.setItem("extraViewId", dataList.id)
+                        window.location.href='/admin/#/update-extra'
                         }} 
                         color="secondary">View
                       </CButton>
@@ -74,4 +79,4 @@ const ListProduct = () => {
   )
 }
 
-export default ListProduct
+export default ListExtra

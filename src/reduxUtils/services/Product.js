@@ -8,6 +8,16 @@ export const addProductService = (data) => {
   });
 };
 
+// export const getAllProductService = () => {
+//   return requestApi({
+//     url: `/followup/notification`,
+//     method: 'POST',
+//     data:{
+//       "notification_type": "new",
+//     }
+//   });
+// };
+
 export const getAllProductService = () => {
   return requestApi({
     url: `/product`,

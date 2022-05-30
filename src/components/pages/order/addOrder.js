@@ -21,13 +21,7 @@ import CIcon from '@coreui/icons-react'
 import { connect } from "react-redux";
 import { addProductService, getAllProductService } from 'src/reduxUtils/services/Product'
 
-const AddProduct = () => {
-
-  const [imageOne, setimageOne] = useState("./images/pImage.png");
-  const [imageTwo, setimageTwo] = useState("./images/pImage.png");
-  const [imageThree, setimageThree] = useState("./images/pImage.png");
-  const [imageFour, setimageFour] = useState("./images/pImage.png");
-  const [imageFive, setimageFive] = useState("./images/pImage.png");
+const AddOrder = () => {
   
   let successAlert, loadingAlert, errorAlert = false
   const [inputs, setInputs] = useState({});

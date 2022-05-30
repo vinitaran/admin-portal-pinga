@@ -10,6 +10,10 @@ import {
 import CIcon from '@coreui/icons-react'
 
 const TheHeaderDropdown = () => {
+  const LogoutUser = () =>{
+    localStorage.clear();
+    window.location.href='/admin/#/login'
+  }
   return (
     <CDropdown
       inNav
@@ -17,12 +21,13 @@ const TheHeaderDropdown = () => {
       direction="down"
     >
       <CDropdownToggle className="c-header-nav-link" caret={false}>
+      <strong onClick={LogoutUser}>Logout</strong>
         <div className="c-avatar">
-          <CImg
+          {/* <CImg
             src={'avatars/6.jpg'}
             className="c-avatar-img"
-            alt="admin@bootstrapmaster.com"
-          />
+            alt=""
+          /> */}
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
@@ -34,17 +39,9 @@ const TheHeaderDropdown = () => {
         >
           <strong>Account</strong>
         </CDropdownItem>
-        
-        <CDropdownItem>
-          <CIcon name="cil-user" className="mfe-2" />Profile
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-settings" className="mfe-2" />
-          Settings
-        </CDropdownItem>
-        
+                
         <CDropdownItem divider />
-        <CDropdownItem>
+        <CDropdownItem >
           <CIcon name="cil-lock-locked" className="mfe-2" />
           Logout
         </CDropdownItem>

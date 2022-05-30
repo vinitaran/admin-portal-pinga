@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy, useState,useEffect} from 'react'
 import {
   CWidgetDropdown,
   CRow,
@@ -10,16 +10,31 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import ChartLineSimple from '../charts/ChartLineSimple'
+import { getSingleDashboardService } from 'src/reduxUtils/services/Dashboard'
+
 
 const WidgetsDropdown = () => {
+  var [dataList, setDataList] = useState([]);
+  
+  let SingleDashBoardList = []
+  useEffect(() => {
+    console.log("AllCustomerList")
+    getSingleDashboardService().then(res=>{
+      SingleDashBoardList = res.data.data
+      setDataList(res.data.data[0])
+      console.log("AllCustomerList")
+      console.log(SingleDashBoardList)
+    })
+  },[])
+
   // render
   return (
     <CRow>
       <CCol sm="6" lg="4">
         <CWidgetDropdown
           color="gradient-primary"
-          header="10000"
-          text="Total Users"
+          header={dataList.user_count}
+          text="New Users"
           footerSlot={
             <ChartLineSimple
               pointed
@@ -38,8 +53,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="4">
         <CWidgetDropdown
           color="gradient-info"
-          header="1000"
-          text="Total Products"
+          header={dataList.product_count}
+          text="Follow Up"
           footerSlot={
             <ChartLineSimple
               pointed
@@ -60,21 +75,44 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="4">
         <CWidgetDropdown
           color="gradient-warning"
-          header="9823"
-          text="Total Order"
+          header={dataList.product_count}
+          text="Meeting"
           footerSlot={
             <ChartLineSimple
-              className="mt-3"
+              pointed
+              className="mt-3 mx-3"
               style={{height: '70px'}}
-              backgroundColor="rgba(255,255,255,.2)"
-              dataPoints={[78, 81, 80, 45, 34, 12, 40]}
-              options={{ elements: { line: { borderWidth: 2.5 }}}}
+              dataPoints={[1, 18, 9, 17, 34, 22, 11]}
               pointHoverBackgroundColor="warning"
+              options={{ elements: { line: { tension: 0.00001 }}}}
               label="Members"
               labels="months"
             />
           }
         >
+          
+        </CWidgetDropdown>
+      </CCol>
+
+      <CCol sm="6" lg="4">
+        <CWidgetDropdown
+          color="gradient-info"
+          header={dataList.product_count}
+          text="Payment"
+          footerSlot={
+            <ChartLineSimple
+              pointed
+              className="mt-3 mx-3"
+              style={{height: '70px'}}
+              dataPoints={[1, 18, 9, 17, 34, 22, 11]}
+              pointHoverBackgroundColor="info"
+              options={{ elements: { line: { tension: 0.00001 }}}}
+              label="Members"
+              labels="months"
+            />
+          }
+        >
+          
         </CWidgetDropdown>
       </CCol>
 

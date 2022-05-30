@@ -26,31 +26,58 @@ const getBadge = status => {
 
 
 
-const fields = ['product_name','quantity','price', 'sell_price','category_name','event','status']
+const fields = ["order_id","total_price","payment_status","name","mobile","email","p_name","p_price","p_sell_price","o_quantity","o_price","ew_quantity","ew_price","ew_type","ew_data","service_name","s_price","s_product_type"]
 const ListOrder = () => {
 
   var [dataList, setDataList] = useState([]);
   
   let AllOrderList = []
   useEffect(() => {
-    setTimeout(() => {
-      getAllOrderService().then(res=>{
-        AllOrderList = res.data.data
-        setDataList(res.data.data)
-        console.log("orderlist")
-        console.log(AllOrderList)
-      })
-    }, 1000);
-  })
+    getAllOrderService().then(res=>{
+      AllOrderList = res.data.data
+      // setDataList(res.data.data)
+
+      // convert string to json
+      var productList = []
+      var repeatOrderId
+      for (let i = 0; i < AllOrderList.length; i++) {
+        productList[i] = AllOrderList[i]
+        let jsonObject = AllOrderList[i]
+        if(productList[i].order_id == repeatOrderId){
+          productList[i].order_id = ""
+          productList[i].total_price = "" 
+          productList[i].payment_status = ""
+          productList[i].name = ""
+          productList[i].mobile = ""
+          productList[i].email = ""
+        }else{
+          repeatOrderId = productList[i].order_id
+        }
+        
+        Object.keys(jsonObject).forEach(key => { 
+          productList[i][key] = jsonObject[key]==null?"":jsonObject[key]
+          
+        })
+      }
+      // end json convert
+      setDataList(productList)
+    })
+    
+  }, [])
+
   return (
     <>
+    
       <CRow>
         <CCol xs="12" lg="12">
           <CCard>
             <CCardHeader>
               Order List
             </CCardHeader>
+               
+                
             <CCardBody>
+  
             <CDataTable
               items={dataList}
               fields={fields}
@@ -61,7 +88,7 @@ const ListOrder = () => {
                   (dataList)=>(
                     <td>
                       <CButton block onClick={()=>{localStorage.setItem("orderViewId", dataList.id)
-                        window.location.href='/#/update-order'
+                        window.location.href='/admin/#/update-order'
                         }} 
                         color="secondary">{dataList.status}
                       </CButton>

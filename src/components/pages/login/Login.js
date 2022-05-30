@@ -16,10 +16,13 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
+import { LoginService } from 'src/reduxUtils/services/Login'
 
 const Login = () => {
   
+  if(localStorage.getItem("admintoken")){
+    window.location.href='/admin/#/dashboard'
+  }
   const [inputs, setInputs] = useState({});
   const handleChange = (event) => {
     const name = event.target.name;
@@ -28,18 +31,21 @@ const Login = () => {
   }
 
   const submitData = () => {
-    alert(inputs)
-    axios.post('http://127.0.0.1:8080/api/user/login', {
-      'mobile':inputs.mobile,
-      'password':inputs.password
+    LoginService(inputs).then((data)=>{
+      
+      if(data.data.status == 'success'){
+        localStorage.setItem("admintoken", data.data.token)
+        window.location.href='/admin/#/dashboard'
+      }else{
+        alert("Login failed!")
+      }
+      
+
+    }).catch((err)=>{
+      alert("Login failed!")
     })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
   }
+
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -81,12 +87,9 @@ const Login = () => {
               <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Sign up</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
-                    </Link>
+                    <h2>PINGA</h2>
+                    <p></p>
+                    
                   </div>
                 </CCardBody>
               </CCard>

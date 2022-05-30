@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { lazy, useState,useEffect} from 'react'
 import {
   CBadge,
   CButton,
@@ -14,12 +14,16 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
+
+
 import MainChartExample from '../../../views/charts/MainChartExample.js'
 
 const WidgetsDropdown = lazy(() => import('../../../views/widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../../../views/widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
+
+  
   return (
     <>
       <WidgetsDropdown />

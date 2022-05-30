@@ -59,7 +59,7 @@ const ListCustomer = () => {
                   (dataList)=>(
                     <td>
                       <CButton block onClick={()=>{localStorage.setItem("CustomerViewId", dataList.id)
-                        window.location.href='/#/update-customer'
+                        window.location.href='/admin/#/update-customer'
                         }} 
                         color="secondary">{dataList.status}
                       </CButton>

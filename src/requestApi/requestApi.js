@@ -1,10 +1,19 @@
 import axios from 'axios';
 
+
 const requestApi = (options) => {
+    let token = null
+    try{
+        token = "Bearer "+localStorage.getItem('admintoken')
+    }catch{
+        token = null
+    }
     const client = axios.create({
-        baseURL: 'http://localhost:8080/api',
+        // baseURL: 'http://127.0.0.1:8080/api',
+        // baseURL: 'https://stagapi.pingaweb.com',
+        baseURL: 'https://api.shreejiinfashion.com/api',
         headers: {
-            authorization: "bearer "
+            Authorization: token
         }
     });
 

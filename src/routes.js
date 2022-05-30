@@ -19,6 +19,9 @@ const listProduct = React.lazy(() => import('./components/pages/product/listProd
 const listOrder = React.lazy(() => import('./components/pages/order/listOrder'));
 const listCustomer = React.lazy(() => import('./components/pages/customer/listCustomer'));
 const listInventory = React.lazy(() => import('./components/pages/inventory/listInventory'));
+const addExtra = React.lazy(() => import('./components/pages/extra/addExtra'));
+const listExtra = React.lazy(() => import('./components/pages/extra/listExtra'));
+const updateExtra = React.lazy(() => import('./components/pages/extra/updateExtra'));
 
 // end by manish
 
@@ -71,6 +74,10 @@ const routes = [
   { path: '/list-order', name: 'List Order', component: listOrder },
   { path: '/list-customer', name: 'List customer', component: listCustomer },
   { path: '/list-inventory', name: 'List inventory', component: listInventory },
+  
+  { path: '/add-extra', name: 'add setting', component: addExtra },
+  { path: '/list-extra', name: 'list setting', component: listExtra },
+  { path: '/update-extra', name: 'update setting', component: updateExtra },
   // end by manish
 
   { path: '/base/jumbotrons', name: 'Jumbotrons', component: Jumbotrons },

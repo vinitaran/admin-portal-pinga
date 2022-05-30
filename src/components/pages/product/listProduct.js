@@ -34,11 +34,14 @@ const ListProduct = () => {
   useEffect(() => {
     setTimeout(() => {
       getAllProductService().then(res=>{
+        console.log(res)
         AllProductList = res.data.data
+        console.log("manish")
         setDataList(res.data.data)
-      })
-    }, 1000);
-  })
+      }).catch((err)=> console.log(err));
+    }, []);
+  });
+  
   return (
     <>
       <CRow>
@@ -58,7 +61,7 @@ const ListProduct = () => {
                   (dataList)=>(
                     <td>
                       <CButton block onClick={()=>{localStorage.setItem("productViewId", dataList.id)
-                        window.location.href='/#/update-product'
+                        window.location.href='/admin/#/update-product/'+dataList.id
                         }} 
                         color="secondary">View
                       </CButton>

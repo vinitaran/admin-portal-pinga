@@ -24,6 +24,11 @@ import {
 }  from './index'
 
 const TheHeader = () => {
+
+  if(!localStorage.getItem("admintoken")){
+    window.location.href='/admin/#/login'
+  }
+
   const dispatch = useDispatch()
   const sidebarShow = useSelector(state => state.sidebarShow)
 

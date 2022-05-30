@@ -58,7 +58,7 @@ const ListInventory = () => {
                   (dataList)=>(
                     <td>
                       <CButton block onClick={()=>{localStorage.setItem("inventoryViewId", dataList.id)
-                        window.location.href='/#/single-inventory'
+                        window.location.href='/admin/#/single-inventory'
                         }} 
                         color="secondary">View
                       </CButton>
