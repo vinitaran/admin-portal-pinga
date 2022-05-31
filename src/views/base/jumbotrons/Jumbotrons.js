@@ -11,7 +11,7 @@ import {
   CEmbed,
   CEmbedItem
 } from '@coreui/react'
-import { DocsLink } from 'src/reusable'
+import { DocsLink } from '../../../reusable'
 
 const Jumbotrons = () => {
 

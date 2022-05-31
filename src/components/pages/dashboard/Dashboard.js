@@ -17,11 +17,10 @@ import {
   CCardFooter,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { addExtraService, getAllExtraService } from 'src/reduxUtils/services/Extra'
+import { addExtraService, getAllExtraService } from '../../../reduxUtils/services/Extra'
 
 
-import { getAllProductService } from 'src/reduxUtils/services/Product'
-
+import { getAllProductService } from '../../../reduxUtils/services/Product'
 const getBadge = status => {
   switch (status) {
     case 'Active': return 'success'

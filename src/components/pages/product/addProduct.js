@@ -21,9 +21,9 @@ import {
 
 import CIcon from '@coreui/icons-react'
 import { connect } from "react-redux";
-import { addProductService, getAllProductService } from 'src/reduxUtils/services/Product'
+import { addProductService, getAllProductService } from '../../../reduxUtils/services/Product'
 import "./Filter.css";
-import { uploadFileService } from 'src/reduxUtils/services/uploadFile';
+import { uploadFileService } from '../../../reduxUtils/services/uploadFile';
 
 //-----------------------------------------
 

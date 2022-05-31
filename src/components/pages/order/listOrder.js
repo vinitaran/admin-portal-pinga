@@ -11,7 +11,7 @@ import {
 } from '@coreui/react'
 
 
-import { getAllOrderService } from 'src/reduxUtils/services/Order'
+import { getAllOrderService } from '../../../reduxUtils/services/Order'
 import usersData from '../../../views/users/UsersData'
 
 const getBadge = status => {

@@ -17,7 +17,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { connect } from "react-redux";
-import { addExtraService, getAllExtraService } from 'src/reduxUtils/services/Extra'
+import { addExtraService, getAllExtraService } from '../../../reduxUtils/services/Extra'
 
 const AddExtra = () => {
   

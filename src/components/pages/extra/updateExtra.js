@@ -19,7 +19,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-import { getSingleExtraService, updateExtraService } from 'src/reduxUtils/services/Extra'
+import { getSingleExtraService, updateExtraService } from '../../../reduxUtils/services/Extra'
 
 
 const UpdateExtra = () => {

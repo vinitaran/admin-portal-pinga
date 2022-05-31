@@ -24,8 +24,8 @@ import ReactFileReader from "react-file-reader";
 import {
   getSingleProductService,
   updateProductService,
-} from "src/reduxUtils/services/Product";
-import { uploadFileService } from "src/reduxUtils/services/uploadFile";
+} from '../../../reduxUtils/services/Product';
+import { uploadFileService } from "../../../reduxUtils/services/uploadFile";
 
 let fileList = [];
 const UpdateProduct = () => {

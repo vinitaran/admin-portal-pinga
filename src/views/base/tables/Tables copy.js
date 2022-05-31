@@ -8,7 +8,7 @@ import {
   CDataTable,
   CRow
 } from '@coreui/react'
-import { DocsLink } from 'src/reusable'
+import { DocsLink } from '../../../reusable'
 
 import usersData from '../../users/UsersData'
 

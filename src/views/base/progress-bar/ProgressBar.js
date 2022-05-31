@@ -6,7 +6,7 @@ import {
   CProgress,
   CProgressBar
 } from '@coreui/react'
-import { DocsLink } from 'src/reusable'
+import { DocsLink } from '../../../reusable'
 
 const ProgressBar = () => {
   return (

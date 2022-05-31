@@ -32,7 +32,7 @@ import {
   CSwitch
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
+import { DocsLink } from '../../../reusable'
 
 const BasicForms = () => {
   const [collapsed, setCollapsed] = React.useState(true)

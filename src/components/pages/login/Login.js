@@ -16,7 +16,7 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { LoginService } from 'src/reduxUtils/services/Login'
+import { LoginService } from '../../../reduxUtils/services/Login'
 
 const Login = () => {
   

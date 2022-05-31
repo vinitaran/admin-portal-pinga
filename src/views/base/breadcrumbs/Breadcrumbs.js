@@ -10,7 +10,7 @@ import {
   CCol,
   CRow
 } from '@coreui/react'
-import { DocsLink } from 'src/reusable'
+import { DocsLink } from '../../../reusable'
 import routes from '../../../routes'
 
 const Breadcrumbs = () => {

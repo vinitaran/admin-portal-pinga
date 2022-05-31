@@ -71,13 +71,13 @@ const routes = [
   { path: '/view-history', name: 'View Patient History', component: updateProductForms },
   { path: '/list-product', name: 'List Product', component: listProduct },
   
-  { path: '/list-order', name: 'List Order', component: listOrder },
-  { path: '/list-customer', name: 'List customer', component: listCustomer },
-  { path: '/list-inventory', name: 'List inventory', component: listInventory },
+  // { path: '/list-order', name: 'List Order', component: listOrder },
+  // { path: '/list-customer', name: 'List customer', component: listCustomer },
+  // { path: '/list-inventory', name: 'List inventory', component: listInventory },
   
-  { path: '/add-extra', name: 'add setting', component: addExtra },
-  { path: '/list-extra', name: 'list setting', component: listExtra },
-  { path: '/update-extra', name: 'update setting', component: updateExtra },
+  // { path: '/add-extra', name: 'add setting', component: addExtra },
+  // { path: '/list-extra', name: 'list setting', component: listExtra },
+  // { path: '/update-extra', name: 'update setting', component: updateExtra },
   // end by vinita
 
   { path: '/base/jumbotrons', name: 'Jumbotrons', component: Jumbotrons },

@@ -19,7 +19,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { connect } from "react-redux";
-import { addProductService, getAllProductService } from 'src/reduxUtils/services/Product'
+import { addProductService, getAllProductService } from '../../../reduxUtils/services/Product'
 
 const AddOrder = () => {
   

@@ -13,7 +13,7 @@ import {
   CCardHeader
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { DocsLink } from 'src/reusable'
+import { DocsLink } from '../../../reusable'
 
 const Tabs = () => {
   const [active, setActive] = useState(1)

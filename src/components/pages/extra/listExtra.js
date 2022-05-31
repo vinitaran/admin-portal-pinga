@@ -11,7 +11,7 @@ import {
 } from '@coreui/react'
 
 
-import { getAllExtraService } from 'src/reduxUtils/services/Extra'
+import { getAllExtraService } from '../../../reduxUtils/services/Extra'
 
 const getBadge = status => {
   switch (status) {

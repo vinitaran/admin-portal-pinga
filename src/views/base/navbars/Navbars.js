@@ -19,7 +19,7 @@ import {
   CButton,
   CImg
 } from '@coreui/react'
-import { DocsLink } from 'src/reusable'
+import { DocsLink } from '../../../reusable'
 
 const CNavbars = () => {
   const [isOpen, setIsOpen] = useState(false)
