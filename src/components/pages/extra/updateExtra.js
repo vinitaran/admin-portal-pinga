@@ -38,7 +38,7 @@ const UpdateExtra = () => {
       getSingleExtraService(1).then(res=>{
         setDataList(res.data.data)
         console.log(res.data.data)
-        console.log("manishone")
+        console.log("vinitaone")
       })
   },[])
   console.log(dataList[0])

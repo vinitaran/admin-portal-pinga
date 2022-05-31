@@ -36,7 +36,7 @@ const ListProduct = () => {
       getAllProductService().then(res=>{
         console.log(res)
         AllProductList = res.data.data
-        console.log("manish")
+        console.log("vinita")
         setDataList(res.data.data)
       }).catch((err)=> console.log(err));
     }, []);
@@ -61,7 +61,7 @@ const ListProduct = () => {
                   (dataList)=>(
                     <td>
                       <CButton block onClick={()=>{localStorage.setItem("productViewId", dataList.id)
-                        window.location.href='/admin/#/update-product/'+dataList.id
+                        window.location.href='/admin/#/view-history/'+dataList.id
                         }} 
                         color="secondary">View
                       </CButton>

@@ -9,7 +9,7 @@ const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'));
 const Collapses = React.lazy(() => import('./views/base/collapses/Collapses'));
 const BasicForms = React.lazy(() => import('./views/base/forms/BasicForms'));
 
-// by manish
+// by vinita
 
 const Dashboard = React.lazy(() => import('./components/pages/dashboard/Dashboard'));
 
@@ -23,7 +23,7 @@ const addExtra = React.lazy(() => import('./components/pages/extra/addExtra'));
 const listExtra = React.lazy(() => import('./components/pages/extra/listExtra'));
 const updateExtra = React.lazy(() => import('./components/pages/extra/updateExtra'));
 
-// end by manish
+// end by vinita
 
 const Jumbotrons = React.lazy(() => import('./views/base/jumbotrons/Jumbotrons'));
 const ListGroups = React.lazy(() => import('./views/base/list-groups/ListGroups'));
@@ -64,11 +64,11 @@ const routes = [
   { path: '/base/collapses', name: 'Collapse', component: Collapses },
   { path: '/base/forms', name: 'Forms', component: BasicForms },
   
-  // by manish
+  // by vinita
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/add-product', name: 'Add Product', component: addProductForms },
-  { path: '/update-product', name: 'Update Product', component: updateProductForms },
+  { path: '/view-history', name: 'View Patient History', component: updateProductForms },
   { path: '/list-product', name: 'List Product', component: listProduct },
   
   { path: '/list-order', name: 'List Order', component: listOrder },
@@ -78,7 +78,7 @@ const routes = [
   { path: '/add-extra', name: 'add setting', component: addExtra },
   { path: '/list-extra', name: 'list setting', component: listExtra },
   { path: '/update-extra', name: 'update setting', component: updateExtra },
-  // end by manish
+  // end by vinita
 
   { path: '/base/jumbotrons', name: 'Jumbotrons', component: Jumbotrons },
   { path: '/base/list-groups', name: 'List Groups', component: ListGroups },

@@ -71,7 +71,7 @@ const UpdateProduct = () => {
         <CCol xs="12" md="6">
           <CCard>
             <CCardHeader>
-              Update Product
+              View Patient History
             </CCardHeader>
             <CCardBody>
               <CForm className="form-horizontal">
