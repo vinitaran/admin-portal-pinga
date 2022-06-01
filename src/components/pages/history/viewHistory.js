@@ -19,48 +19,45 @@ import {
   CSpinner,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+// import { useLocation } from "react-router-dom";
 
 import ReactFileReader from "react-file-reader";
 import {
-  getSingleProductService,
-  updateProductService,
-} from '../../../reduxUtils/services/Product';
+  getUserDetails,
+  submitConsult,
+} from "../../../reduxUtils/services/History";
 import { uploadFileService } from "../../../reduxUtils/services/uploadFile";
 
 let fileList = [];
-const UpdateProduct = () => {
+const ViewHistory = () => {
   // const [expert, setExpert] = useState(true);
-  const expert = window.localStorage.getItem('role') == 'the' ? false : true;
+  //   const expert = window.localStorage.getItem('role') == 'the' ? false : true;
+  const expert = true;
   console.log(expert);
 
   const [isLoading, setisLoading] = useState(false);
-  const [inputs, setInputs] = useState({});
+
+  var [dataList, setDataList] = useState([]);
+  let location = useLocation().pathname;
+  let items = location.split("/");
+  console.log(items[2]);
+  var patientNumber = items[2];
+
+  const [inputs, setInputs] = useState({ patient_id: dataList[0]?.id });
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  var [dataList, setDataList] = useState([]);
-  let location = useLocation().pathname;
-  let items = location.split("/");
-  console.log(items[2]);
-  var productId = items[2];
-
   useEffect(() => {
-    getSingleProductService(productId).then((res) => {
-      setDataList(res.data.data[0]);
-      console.log(res.data.data[0]);
+    getUserDetails(patientNumber).then((res) => {
+      setDataList(res.data);
+      //   console.log(res.data);
     });
   }, []);
   console.log(dataList);
-  const mediaUrlList = dataList.media_url?.map((url) => (
-    <img
-      style={{ margin: "10px", width: "100px", height: "100px" }}
-      src={url}
-      class="img-thumbnail"
-    />
-  ));
+
   const handleFiles = (files) => {
     // console.log(files.base64.toString())
     console.log(files.fileList);
@@ -98,29 +95,38 @@ const UpdateProduct = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     //console.log(inputs);
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-    inputs["media_url"] = fileList;
+    // const name = event.target.name;
+    // const value = event.target.value;
+    // setInputs((values) => ({ ...values, [name]: value }));
+    console.log(inputs);
+    // inputs["media_url"] = fileList;
 
-    inputs["color"] = dataList.color;
-    inputs["fabric"] = dataList.fabric;
-    inputs["event"] = dataList.event;
-    inputs["type"] = dataList.type;
-    inputs["category_id"] = dataList.category_id;
-    if (fileList.length == 0) {
-      inputs["media_url"] = dataList.media_url;
-    }
+    // inputs["color"] = dataList.color;
+    // inputs["fabric"] = dataList.fabric;
+    // inputs["event"] = dataList.event;
+    // inputs["type"] = dataList.type;
+    // inputs["category_id"] = dataList.category_id;
+    // if (fileList.length == 0) {
+    //   inputs["media_url"] = dataList.media_url;
+    // }
 
-    inputs["name"] = inputs["name"] ? inputs["name"] : dataList.name;
-    updateProductService(productId, inputs)
-      .then((data) => {
-        setInputs((values) => ({ [name]: null }));
+    // var date
+
+    // setInputs(values => ({...values, "patient_id":dataList[0]?.patient_id }))
+    inputs["patient_id"] = dataList[0]?.patient_id;
+
+    // inputs["name"] = inputs["name"] ? inputs["name"] : dataList.name;
+    submitConsult(inputs)
+      .then((res) => {
+        console.log(res);
+        // if(!alert('Data Submitted Successfully!')){window.location.reload();}
       })
       .catch((err) => {
-        alert("something wrong!");
+        console.log(err);
       });
   };
+
+  console.log(inputs);
 
   return (
     <>
@@ -128,162 +134,209 @@ const UpdateProduct = () => {
         <CCol xs="12" md="12">
           <CCard>
             <CCardHeader>
-              <h3>PINGA HEALTH FORM FOR {expert ? 'EXPERTS' : 'THE'}</h3>
+              <h3>PINGA HEALTH FORM FOR {expert ? "EXPERTS" : "THE"}</h3>
             </CCardHeader>
             <CCardBody>
               <CFormGroup row>
-              <CCol md="4">
-                <CLabel htmlFor="text-input"><h6>Name</h6></CLabel>
-              </CCol>
-              <CCol md="4">
-                <CLabel htmlFor="text-input">Vinita Rane</CLabel>
-              </CCol>
+                <CCol md="4">
+                  <CLabel htmlFor="text-input">
+                    <h6>Name</h6>
+                  </CLabel>
+                </CCol>
+                <CCol md="4">
+                  <CLabel htmlFor="text-input">{dataList[0]?.name}</CLabel>
+                </CCol>
               </CFormGroup>
               <CFormGroup row>
-              
-              <CCol md="4">
-                <CLabel htmlFor="text-input"><h6>Previous Consultations</h6></CLabel>
-              </CCol>
-              <CCol md="8">
-                <CLabel htmlFor="text-input">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</CLabel>
-                <CLabel htmlFor="text-input">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</CLabel>
-              </CCol>
+                <CCol md="4">
+                  <CLabel htmlFor="text-input">
+                    <h6>Previous Consultations</h6>
+                  </CLabel>
+                </CCol>
+                <CCol md="8">
+                  {dataList.map((data) => {
+                    const date = data.created_at;
+                    //   const day = date.getDate();
+                    return <><CLabel htmlFor="text-input">{date}</CLabel><br></br></>;
+                  })}
+                </CCol>
               </CFormGroup>
               <CCard>
-              <div class="p-2 text-black" style={{'backgroundColor':'lightyellow'}}>
-                <h6>HOW TO CONDUCT SESSION: </h6>
-                <ol>
-                  <li>Login 3 minutes before the meeting</li>
-                  <li>Keep lighting good</li>
-                  <li>Fill this form and submit immediately after the meeting</li>
-                </ol>
-              </div>
+                <div
+                  class="p-2 text-black"
+                  style={{ backgroundColor: "lightyellow" }}
+                >
+                  <h6>HOW TO CONDUCT SESSION: </h6>
+                  <ol>
+                    <li>Login 3 minutes before the meeting</li>
+                    <li>Keep lighting good</li>
+                    <li>
+                      Fill this form and submit immediately after the meeting
+                    </li>
+                  </ol>
+                </div>
               </CCard>
-              <CForm className="form-horizontal">
-                {
-                  expert ? <CFormGroup row>
-                  <CCol md="4">
-                    <CLabel htmlFor="text-input">
-                      <h6>Your Private Observations</h6>
-                    </CLabel>
-                  </CCol>
-                  <CCol xs="12" md="8">
-                    {expert ? (
+              {dataList.map((data) => {
+                console.log(data?.data?.private_observation);
+                return (
+                  <CCard style={{ backgroundColor: "#EBEDEF", padding: "1em" }}>
+                      <h5>{data?.dr_name} : {data?.created_at}</h5> 
+                      <hr></hr>
+                    <CForm className="form-horizontal">
+                      {expert ? (
+                        <CFormGroup row>
+                          <CCol md="5">
+                            <CLabel htmlFor="text-input">
+                              <h6>Your Private Observations</h6>
+                            </CLabel>
+                          </CCol>
+                          <CCol xs="12" md="7">
+                            <CLabel htmlFor="text-input">
+                              {data?.data?.private_observation}
+                            </CLabel>
+                          </CCol>
+                        </CFormGroup>
+                      ) : (
+                        ""
+                      )}
+                      <CFormGroup row>
+                        <CCol md="5">
+                          <CLabel htmlFor="number-input">
+                            <h6>Recommendations/ Prescriptions - Lifestyle</h6>
+                          </CLabel>
+                        </CCol>
+                        <CCol xs="12" md="7">
+                          <CLabel htmlFor="text-input">
+                            {data?.data?.prescription_lifestyle}
+                          </CLabel>
+                        </CCol>
+                      </CFormGroup>
+                      <CFormGroup row>
+                        <CCol md="5">
+                          <CLabel htmlFor="text-input">
+                            <h6>Recommendations/ Prescriptions - Medical</h6>
+                          </CLabel>
+                        </CCol>
+                        <CCol xs="12" md="7">
+                          <CLabel htmlFor="text-input">
+                            {data?.data?.prescription_medical}
+                          </CLabel>
+                        </CCol>
+                      </CFormGroup>
+                      <CFormGroup row>
+                        <CCol md="5">
+                          <CLabel htmlFor="textarea-input">
+                            <h6>General Comments for Pinga team</h6>
+                          </CLabel>
+                        </CCol>
+                        <CCol xs="12" md="7">
+                          <CLabel htmlFor="text-input">
+                            {data?.data?.general}
+                          </CLabel>
+                        </CCol>
+                      </CFormGroup>
+                    </CForm>
+                  </CCard>
+                );
+              })}
+
+              {expert ? (
+                <CForm className="form-horizontal">
+                  <CFormGroup row>
+                    <CCol md="4">
+                      <CLabel htmlFor="text-input">
+                        <h6>Your Private Observations</h6>
+                      </CLabel>
+                    </CCol>
+                    <CCol xs="12" md="8">
                       <CInput
                         id="text-input"
-                        name="name"
-                        value={inputs.name ? inputs.name : dataList.name}
-                        onChange={handleChange}
-                        placeholder="Enter Product Name"
-                      />
-                    ) : (
-                      <CLabel htmlFor="text-input">
-                        {inputs.name ? inputs.name : dataList.name}
-                      </CLabel>
-                    )}
-                  </CCol>
-                </CFormGroup> : ''
-                }
-                <CFormGroup row>
-                  <CCol md="4">
-                    <CLabel htmlFor="number-input">
-                      <h6>Recommendations/ Prescriptions - Lifestyle</h6>
-                    </CLabel>
-                  </CCol>
-                  <CCol xs="12" md="8">
-                    {expert ? (
-                      <CInput
-                        id="text-input"
-                        name="name"
-                        value={inputs.name ? inputs.name : dataList.name}
-                        onChange={handleChange}
-                        placeholder="Enter Product Name"
-                      />
-                    ) : (
-                      <CLabel htmlFor="text-input">
-                        {inputs.name ? inputs.name : dataList.name}
-                      </CLabel>
-                    )}
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="4">
-                    <CLabel htmlFor="text-input">
-                      <h6>Recommendations/ Prescriptions - Medical</h6>
-                    </CLabel>
-                  </CCol>
-                  <CCol xs="12" md="8">
-                    {expert ? (
-                      <CInput
-                        id="text-input"
-                        name="name"
-                        value={inputs.name ? inputs.name : dataList.name}
-                        onChange={handleChange}
-                        placeholder="Enter Product Name"
-                      />
-                    ) : (
-                      <CLabel htmlFor="text-input">
-                        {inputs.name ? inputs.name : dataList.name}
-                      </CLabel>
-                    )}
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="4">
-                    <CLabel htmlFor="textarea-input">
-                      <h6>General Comments for Pinga team</h6>
-                    </CLabel>
-                  </CCol>
-                  <CCol xs="12" md="8">
-                    {expert ? (
-                      <CTextarea
-                        name="description"
+                        name="private_observation"
                         value={
-                          inputs.description
-                            ? inputs.description
-                            : dataList.description
+                          inputs.private_observation
+                            ? inputs.private_observation
+                            : dataList.private_observation
+                        }
+                        onChange={handleChange}
+                        placeholder="Enter Private Observations"
+                      />
+                    </CCol>
+                  </CFormGroup>
+                  <CFormGroup row>
+                    <CCol md="4">
+                      <CLabel htmlFor="number-input">
+                        <h6>Recommendations/ Prescriptions - Lifestyle</h6>
+                      </CLabel>
+                    </CCol>
+                    <CCol xs="12" md="8">
+                      <CInput
+                        id="text-input"
+                        name="prescription_lifestyle"
+                        value={
+                          inputs.prescription_lifestyle
+                            ? inputs.prescription_lifestyle
+                            : dataList.prescription_lifestyle
+                        }
+                        onChange={handleChange}
+                        placeholder="Enter Prescription Lifestyle"
+                      />
+                    </CCol>
+                  </CFormGroup>
+                  <CFormGroup row>
+                    <CCol md="4">
+                      <CLabel htmlFor="text-input">
+                        <h6>Recommendations/ Prescriptions - Medical</h6>
+                      </CLabel>
+                    </CCol>
+                    <CCol xs="12" md="8">
+                      <CInput
+                        id="text-input"
+                        name="prescription_medical"
+                        value={
+                          inputs.prescription_medical
+                            ? inputs.prescription_medical
+                            : dataList.prescription_medical
+                        }
+                        onChange={handleChange}
+                        placeholder="Enter Prescription Medical"
+                      />
+                    </CCol>
+                  </CFormGroup>
+                  <CFormGroup row>
+                    <CCol md="4">
+                      <CLabel htmlFor="textarea-input">
+                        <h6>General Comments for Pinga team</h6>
+                      </CLabel>
+                    </CCol>
+                    <CCol xs="12" md="8">
+                      <CTextarea
+                        name="general"
+                        value={
+                          inputs.general ? inputs.general : dataList.general
                         }
                         onChange={handleChange}
                         id="textarea-input"
                         rows="9"
-                        placeholder="Enter Product Description..."
+                        placeholder="Enter General comments..."
                       />
-                    ) : (
-                      <CLabel htmlFor="text-input">
-                        {inputs.name ? inputs.name : dataList.name}
-                      </CLabel>
-                    )}
-                  </CCol>
-                </CFormGroup>
-                {/* <CFormGroup row>
-                  <CCol md="4">
-                    <CLabel htmlFor="select">Quantity</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="8">
-                    <CInput id="text-input" name="quantity" value={inputs.quantity?inputs.quantity:dataList.quantity} onChange={handleChange} placeholder="Enter Quantity"/>
-                  </CCol>
-                </CFormGroup> */}
-                {/* <CFormGroup row>
-                  <CCol xs="12" md="12">{mediaUrlList} </CCol>   
-                  <CLabel col md="3" htmlFor="file-input">Image</CLabel>
-                  <CCol xs="12" md="9">
-                    <ReactFileReader name="image_one" fileTypes={[".jpeg",".jpg",".png"]} base64={true} multipleFiles={true} handleFiles={handleFiles}>
-                      <CButton size="sm" color="light" className='btn'>Choose Image</CButton>
-                    </ReactFileReader>
-                    {isLoading?<CSpinner color="warning" variant="grow" />:''}
-                                      
-                  </CCol>
-                </CFormGroup> */}
-              </CForm>
+                    </CCol>
+                  </CFormGroup>
+                </CForm>
+              ) : (
+                ""
+              )}
             </CCardBody>
-            <CCardFooter>
-              <CButton onClick={handleSubmit} size="sm" color="primary">
-                <CIcon name="cil-scrubber" /> Update
-              </CButton>
-              <CButton type="reset" size="sm" color="danger">
-                <CIcon name="cil-ban" /> Reset
-              </CButton>
-            </CCardFooter>
+            {expert ? (
+              <CCardFooter
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <CButton onClick={handleSubmit} size="sm" color="warning">
+                  <CIcon name="cil-scrubber" /> Submit
+                </CButton>
+              </CCardFooter>
+            ) : (
+              ""
+            )}
           </CCard>
         </CCol>
       </CRow>
@@ -291,4 +344,4 @@ const UpdateProduct = () => {
   );
 };
 
-export default UpdateProduct;
+export default ViewHistory;

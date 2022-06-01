@@ -8,12 +8,12 @@ const _nav =  [
     to: '/dashboard',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
   },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Add Product',
-    to: '/add-product',
-    icon: 'cil-drop',
-  },
+  // {
+  //   _tag: 'CSidebarNavItem',
+  //   name: 'Add Product',
+  //   to: '/add-product',
+  //   icon: 'cil-drop',
+  // },
   // {
   //   _tag: 'CSidebarNavItem',
   //   name: 'Product List',

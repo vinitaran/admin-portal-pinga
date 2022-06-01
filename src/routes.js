@@ -14,10 +14,10 @@ const BasicForms = React.lazy(() => import('./views/base/forms/BasicForms'));
 
 const Dashboard = React.lazy(() => import('./components/pages/dashboard/Dashboard'));
 
-const addProductForms = React.lazy(() => import('./components/pages/product/addProduct'));
-const updateProductForms = React.lazy(() => import('./components/pages/product/updateProduct'));
-const listProduct = React.lazy(() => import('./components/pages/product/listProduct'));
-const listOrder = React.lazy(() => import('./components/pages/order/listOrder'));
+// const addProductForms = React.lazy(() => import('./components/pages/product/addProduct'));
+// const updateProductForms = React.lazy(() => import('./components/pages/product/updateProduct'));
+// const listProduct = React.lazy(() => import('./components/pages/product/listProduct'));
+// const listOrder = React.lazy(() => import('./components/pages/order/listOrder'));
 const listCustomer = React.lazy(() => import('./components/pages/customer/listCustomer'));
 const listInventory = React.lazy(() => import('./components/pages/inventory/listInventory'));
 const addExtra = React.lazy(() => import('./components/pages/extra/addExtra'));
@@ -68,9 +68,9 @@ const routes = [
   // by vinita
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/add-product', name: 'Add Product', component: addProductForms },
+  // { path: '/add-product', name: 'Add Product', component: addProductForms },
   { path: '/view-history', name: 'View Patient History', component: ViewHistory },
-  { path: '/list-product', name: 'List Product', component: listProduct },
+  // { path: '/list-product', name: 'List Product', component: listProduct },
   
   // { path: '/list-order', name: 'List Order', component: listOrder },
   // { path: '/list-customer', name: 'List customer', component: listCustomer },

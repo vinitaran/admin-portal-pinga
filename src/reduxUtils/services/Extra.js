@@ -2,9 +2,8 @@ import requestApi from '../../requestApi/requestApi';
 
 export const getUser = (data) => {
   return requestApi({
-    url: `/user/filter`,
-    method: 'POST',
-    data
+    url: `/user/filter/${data}`,
+    method: 'GET'
   });
 };
 
