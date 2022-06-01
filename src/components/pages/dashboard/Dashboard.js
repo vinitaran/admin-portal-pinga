@@ -17,7 +17,7 @@ import {
   CCardFooter,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { addExtraService, getAllExtraService } from '../../../reduxUtils/services/Extra'
+import { getUser, getAllExtraService } from '../../../reduxUtils/services/Extra'
 
 
 import { getAllProductService } from '../../../reduxUtils/services/Product'
@@ -33,7 +33,7 @@ const getBadge = status => {
 
 
 
-const fields = ['name', 'Phone Number','Email ID','status']
+const fields = ['name', 'mobile','email','status']
 const ListProduct = () => {
 
   let successAlert, loadingAlert, errorAlert = false
@@ -41,23 +41,28 @@ const ListProduct = () => {
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}))
+    setInputs(values => ({...values, [name]: value}));
   }
 
+  var [dataList, setDataList] = useState([]);
+
   const handleSubmit = (event) => {
+    console.log("submit");
     loadingAlert = true
     event.preventDefault();
     //console.log(inputs);
-    let input_data = {
-      "data":{"title":inputs.title,"description":inputs.description},
-      "type":inputs.type,
-      "status":"active"
-    }
-    addExtraService(input_data).then((data)=>{
-        console.log(data.status)
+    // let input_data = {
+    //   "data":{"title":inputs.title,"description":inputs.description},
+    //   "type":inputs.type,
+    //   "status":"active"
+    // }
+    getUser(inputs).then((data)=>{
+        console.log(data.data)
         if(data.status == 200)
         {
-          alert("data saved succesfully!")
+          alert("data saved succesfully!");
+          setDataList(data.data);
+          
         }else{
           alert("something wrong!")
         }
@@ -68,18 +73,20 @@ const ListProduct = () => {
       })
   }
 
-  var [dataList, setDataList] = useState([]);
+  console.log(dataList)
+  const items = [dataList]
+  console.log(items.length)
   
   let AllProductList = []
   useEffect(() => {
-    setTimeout(() => {
-      getAllProductService().then(res=>{
-        console.log(res)
-        AllProductList = res.data.data
-        console.log("vinita")
-        setDataList(res.data.data)
-      }).catch((err)=> console.log(err));
-    }, []);
+    // setTimeout(() => {
+    //   getAllProductService().then(res=>{
+    //     console.log(res)
+    //     AllProductList = res.data.data
+    //     console.log("vinita")
+    //     setDataList(res.data.data)
+    //   }).catch((err)=> console.log(err));
+    // }, []);
   });
   
   return (
@@ -97,7 +104,7 @@ const ListProduct = () => {
                     <CLabel htmlFor="text-input"><h6>Search by patient name / mobile number</h6></CLabel>
                   </CCol>
                   <CCol xs="12" md="8">
-                    <CInput id="text-input" name="type" value={inputs.type || ""} onChange={handleChange} placeholder="Enter Type" />
+                    <CInput id="text-input" name="name" value={inputs.name || ""} onChange={handleChange} placeholder="Enter Type" />
                   </CCol>
                 </CFormGroup>
               </CForm>
@@ -116,7 +123,7 @@ const ListProduct = () => {
             </CCardHeader>
             <CCardBody>
             <CDataTable
-              items={dataList}
+              items={items}
               fields={fields}
               itemsPerPage={10}
               pagination
@@ -125,7 +132,7 @@ const ListProduct = () => {
                   (dataList)=>(
                     <td>
                       <CButton block onClick={()=>{localStorage.setItem("productViewId", dataList.id)
-                        window.location.href='/admin/#/view-history/'+dataList.id
+                        window.location.href='/admin/#/view-history/'+dataList.name
                         }} 
                         color="secondary">View
                       </CButton>
@@ -133,6 +140,22 @@ const ListProduct = () => {
                   )
               }}
             />
+            {/* <CDataTable
+            fields={fields}
+            items={items}
+            scopedSlots = {{
+              'status':
+                (dataList)=>(
+                  <td>
+                    <CButton block onClick={()=>{localStorage.setItem("productViewId", dataList.id)
+                      window.location.href='/admin/#/view-history/'+dataList.id
+                      }} 
+                      color="secondary">View
+                    </CButton>
+                  </td>
+                )
+            }}
+            /> */}
             </CCardBody>
           </CCard>
         </CCol>          

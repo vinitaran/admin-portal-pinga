@@ -31,15 +31,17 @@ const Login = () => {
   }
 
   const submitData = () => {
+    console.log(inputs)
     LoginService(inputs).then((data)=>{
+      console.log(data)
       
-      if(data.data.status == 'success'){
+      if(data.status === 200){
         localStorage.setItem("admintoken", data.data.token)
+        localStorage.setItem("role", data.data.role)
         window.location.href='/admin/#/dashboard'
       }else{
         alert("Login failed!")
-      }
-      
+      }      
 
     }).catch((err)=>{
       alert("Login failed!")

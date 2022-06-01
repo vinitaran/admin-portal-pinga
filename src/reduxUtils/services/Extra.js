@@ -1,8 +1,8 @@
 import requestApi from '../../requestApi/requestApi';
 
-export const addExtraService = (data) => {
+export const getUser = (data) => {
   return requestApi({
-    url: `/extra`,
+    url: `/user/filter`,
     method: 'POST',
     data
   });

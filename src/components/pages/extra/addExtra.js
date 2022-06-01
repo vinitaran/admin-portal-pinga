@@ -17,7 +17,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { connect } from "react-redux";
-import { addExtraService, getAllExtraService } from '../../../reduxUtils/services/Extra'
+import { getUser, getAllExtraService } from '../../../reduxUtils/services/Extra'
 
 const AddExtra = () => {
   
@@ -32,13 +32,13 @@ const AddExtra = () => {
   const handleSubmit = (event) => {
     loadingAlert = true
     event.preventDefault();
-    //console.log(inputs);
+    console.log(inputs);
     let input_data = {
       "data":{"title":inputs.title,"description":inputs.description},
       "type":inputs.type,
       "status":"active"
     }
-    addExtraService(input_data).then((data)=>{
+    getUser(input_data).then((data)=>{
         console.log(data.status)
         if(data.status == 200)
         {
@@ -68,7 +68,7 @@ const AddExtra = () => {
                     <CLabel htmlFor="text-input">Type</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="text-input" name="type" value={inputs.type || ""} onChange={handleChange} placeholder="Enter Type" />
+                    <CInput id="text-input" name="name" value={inputs.type || ""} onChange={handleChange} placeholder="Enter Type" />
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>

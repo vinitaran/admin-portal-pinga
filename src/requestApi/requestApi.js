@@ -10,8 +10,8 @@ const requestApi = (options) => {
     }
     const client = axios.create({
         // baseURL: 'http://127.0.0.1:8080/api',
-        // baseURL: 'https://stagapi.pingaweb.com',
-        baseURL: 'https://api.shreejiinfashion.com/api',
+        baseURL: 'https://stagapi.pingaweb.com',
+        // baseURL: 'https://api.shreejiinfashion.com/api',
         headers: {
             Authorization: token
         }

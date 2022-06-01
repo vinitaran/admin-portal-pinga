@@ -1,4 +1,5 @@
 import React from 'react';
+import ViewHistory from './components/pages/history/viewHistory';
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
@@ -68,7 +69,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/add-product', name: 'Add Product', component: addProductForms },
-  { path: '/view-history', name: 'View Patient History', component: updateProductForms },
+  { path: '/view-history', name: 'View Patient History', component: ViewHistory },
   { path: '/list-product', name: 'List Product', component: listProduct },
   
   // { path: '/list-order', name: 'List Order', component: listOrder },
